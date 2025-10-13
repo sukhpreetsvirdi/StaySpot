@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>StaySpot | Ultra Beast Cinematic Home</title>
+
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+
+    <!-- 3D Canvas (for background scene) -->
+    <canvas id="bg3d"></canvas>
+
+    <!-- NAVBAR -->
+    <nav
+        class="fixed top-4 left-1/2 transform -translate-x-1/2 w-[92%] md:w-[86%] z-30 p-3 flex items-center justify-between glass border border-white/6">
+        <div class="flex items-center gap-4">
+            <div class="text-2xl">🏠</div>
+            <div class="text-lg font-semibold">StaySpot</div>
+        </div>
+        <div class="hidden md:flex items-center gap-6 text-sm">
+            <a href="#about" class="hover:text-white/80 transition">About</a>
+            <a href="#features" class="hover:text-white/80 transition">Features</a>
+            <a href="#listings" class="hover:text-white/80 transition">Listings</a>
+            <a href="#reviews" class="hover:text-white/80 transition">Reviews</a>
+            <a href="add-listing.html" class="hover:text-white/80 transition">Add Listing</a>
+            <button id="loginBtn" class="ml-3 bg-white text-black px-3 py-1 rounded-md text-sm">Login</button>
+        </div>
+
+        <!-- mobile menu quick buttons -->
+        <div class="md:hidden flex items-center gap-2">
+            <a href="add-listing.html" class="bg-white/6 px-3 py-1 rounded-md text-sm">Add</a>
+        </div>
+    </nav>
+
+
+    <!-- 🏡 HERO SECTION -->
+    <header id="hero" class="relative h-screen w-full flex items-center justify-center text-center overflow-hidden">
+
+        <!-- 🌄 Background Image with Parallax + Blur -->
+        <div id="hero-bg" class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80"
+                alt="StaySpot Hero Background"
+                class="absolute inset-0 w-full h-full object-cover scale-105 blur-[3px] brightness-90 transition-transform duration-[2000ms]" />
+            <!-- Gradient overlay -->
+            <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-transparent"></div>
+        </div>
+
+        <!-- ✨ Floating Decorative Icons -->
+        <img src="https://cdn-icons-png.flaticon.com/512/61/61112.png" alt="icon"
+            class="w-10 absolute left-12 top-36 opacity-70 floating z-10" />
+        <img src="https://cdn-icons-png.flaticon.com/512/888/888859.png" alt="icon"
+            class="w-14 absolute right-14 top-28 opacity-60 floating z-10" />
+        <img src="https://cdn-icons-png.flaticon.com/512/2913/2913465.png" alt="icon"
+            class="w-12 absolute left-6 bottom-44 opacity-60 floating z-10" />
+
+        <!-- 🏠 Hero Text Content -->
+        <div class="relative z-20 max-w-4xl mx-auto text-center px-6">
+            <h1 id="heroTitle" class="text-6xl md:text-8xl font-extrabold text-white leading-tight">
+                <span class="text-[--accent]">Find Your</span>
+                <span id="heroDynamic" class="block text-white mt-3">Perfect Stay</span>
+            </h1>
+            <p class="mt-6 text-lg md:text-xl text-gray-200 max-w-2xl mx-auto">
+                Broker-free, verified listings — landlords and tenants connecting easily in your city.
+            </p>
+            <div class="mt-8 flex items-center justify-center gap-4">
+                <a href="#listings"
+                    class="bg-[--accent] px-6 py-3 rounded-lg font-semibold shadow-lg hover:brightness-95 transition transform hover:-translate-y-1">
+                    Explore Listings
+                </a>
+                <a href="#features" class="border border-white/10 px-5 py-3 rounded-lg glass text-sm">
+                    How it works
+                </a>
+            </div>
+            <div class="mt-6 text-sm text-white/70">
+                Currently <span id="liveCount" class="font-bold text-[--accent]">0</span> verified listings
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10">
+
+        <!-- ABOUT (split layout) -->
+        <section id="about" class="py-24 md:py-32 px-6 md:px-20 bg-transparent">
+            <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6 reveal glass p-8">
+                    <h2 class="text-3xl font-bold text-white">Your Stay, Simplified</h2>
+                    <p class="text-gray-200">StaySpot revolutionizes the home-hunting journey by connecting tenants and
+                        owners directly. Enjoy verified listings, transparent communication, and a broker-free
+                        experience tailored to your city.</p>
+                    <ul class="text-gray-300 list-disc pl-5 space-y-2">
+                        <li>📍 Local-first listings</li>
+                        <li>✔ Verified owners & photos</li>
+                        <li>💬 Direct contact — no middlemen</li>
+                    </ul>
+                </div>
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1600585153855-55fda3c7a0eb?auto=format&fit=crop&w=900&q=80"
+                        class="rounded-2xl shadow-2xl reveal" alt="house" />
+                    <div class="absolute -bottom-10 -left-10 w-36 h-36 bg-[--accent] opacity-20 rounded-full blur-3xl">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURES (floating cards) -->
+        <section id="features" class="py-20 md:py-28 px-6 md:px-20 bg-gradient-to-b from-transparent to-black/10">
+            <div class="max-w-6xl mx-auto">
+                <h3 class="text-3xl md:text-4xl font-bold text-white text-center mb-8">Why StaySpot?</h3>
+                <div id="featureGrid" class="grid md:grid-cols-3 gap-8"></div>
+            </div>
+        </section>
+
+        <!-- HOW IT WORKS (timeline) -->
+        <section id="how" class="py-24 px-6 md:px-20">
+            <div class="max-w-5xl mx-auto text-center">
+                <h3 class="text-2xl font-semibold text-white mb-6">How it works</h3>
+                <div class="relative">
+                    <div class="hidden md:block absolute left-1/2 -translate-x-1/2 w-[2px] bg-white/6 h-full"></div>
+                    <div class="space-y-12">
+                        <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+                            <div class="md:w-1/2 md:text-right text-white">
+                                <h4 class="font-bold">Post your listing</h4>
+                                <p class="text-gray-300">Upload photos & details quickly using the Add Listing form.</p>
+                            </div>
+                            <div class="md:w-1/2 text-left">
+                                <div
+                                    class="w-12 h-12 bg-[--accent] rounded-full flex items-center justify-center text-black font-bold">
+                                    1</div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+                            <div class="md:w-1/2 md:order-2 md:text-left text-white">
+                                <h4 class="font-bold">Browse & filter</h4>
+                                <p class="text-gray-300">Search by area, price, or type. Use map view to pick the
+                                    perfect location.</p>
+                            </div>
+                            <div class="md:w-1/2 text-right md:order-1">
+                                <div
+                                    class="w-12 h-12 bg-[--accent] rounded-full flex items-center justify-center text-black font-bold">
+                                    2</div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+                            <div class="md:w-1/2 md:text-right text-white">
+                                <h4 class="font-bold">Connect instantly</h4>
+                                <p class="text-gray-300">Message owners or call — schedule visits and close the deal.
+                                </p>
+                            </div>
+                            <div class="md:w-1/2 text-left">
+                                <div
+                                    class="w-12 h-12 bg-[--accent] rounded-full flex items-center justify-center text-black font-bold">
+                                    3</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LISTINGS (dynamic grid) -->
+        <section id="listings" class="py-20 px-6 md:px-16 bg-transparent">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex items-center justify-between mb-8">
+                    <h3 class="text-3xl font-bold text-white">Available Listings</h3>
+                    <input id="searchInput" placeholder="Search by address or title..."
+                        class="bg-white/6 border border-white/6 rounded px-3 py-2 text-white placeholder:text-white/60 outline-none" />
+                </div>
+
+                <div id="listingsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            </div>
+        </section>
+
+        <!-- REVIEWS -->
+        <section id="reviews" class="py-20 px-6 md:px-20 bg-gradient-to-r from-[#052022] to-[#053233]">
+            <div class="max-w-6xl mx-auto">
+                <h3 class="text-3xl text-white font-bold text-center mb-8">What people say</h3>
+                <div id="reviewGrid" class="grid md:grid-cols-3 gap-6"></div>
+            </div>
+        </section>
+
+        <!-- STATS & PARTNERS (optional) -->
+        <section id="stats" class="py-16 px-6 md:px-20">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div class="glass p-6">
+                    <div class="text-4xl font-bold text-[--accent] count" data-target="0">0</div>
+                    <div class="text-sm text-gray-300 mt-2">Listings</div>
+                </div>
+                <div class="glass p-6">
+                    <div class="text-4xl font-bold text-[--accent]">100+</div>
+                    <div class="text-sm text-gray-300 mt-2">Active Owners</div>
+                </div>
+                <div class="glass p-6">
+                    <div class="text-4xl font-bold text-[--accent]">4.9</div>
+                    <div class="text-sm text-gray-300 mt-2">Avg Rating</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="py-12 px-6 md:px-20 bg-black/60">
+            <div class="max-w-6xl mx-auto text-center text-gray-300">
+                <div class="mb-4">StaySpot — connecting people with homes.</div>
+                <div class="text-sm">Email: support@stayspot.in | Phone: +91 98765 43210</div>
+                <div class="text-xs mt-4">© 2025 StaySpot — Built by Sukhpreet</div>
+            </div>
+        </footer>
+    </main>
+
+
+
+
+    <!-- 🔐 Login/Register Modal -->
+    <div id="authModal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-md z-50 flex items-center justify-center">
+        <div class="bg-white rounded-2xl shadow-xl w-[90%] max-w-md p-8 text-center text-gray-800 relative">
+            <button id="closeAuth"
+                class="absolute top-3 right-4 text-gray-500 hover:text-gray-700 text-xl">&times;</button>
+            <h2 id="authTitle" class="text-2xl font-bold text-green-700 mb-4">Login</h2>
+
+            <div id="nameField" class="hidden mb-3">
+                <input type="text" id="name" placeholder="Full Name"
+                    class="border border-gray-300 rounded-md w-full p-2" />
+            </div>
+            <input type="email" id="email" placeholder="Email"
+                class="border border-gray-300 rounded-md w-full p-2 mb-3" />
+            <input type="password" id="password" placeholder="Password"
+                class="border border-gray-300 rounded-md w-full p-2 mb-4" />
+
+            <button id="authBtn"
+                class="bg-green-700 text-white px-6 py-2 rounded-md w-full font-semibold">Login</button>
+
+            <p class="mt-3 text-sm text-gray-600">
+                <span id="toggleAuth" class="text-green-700 font-medium cursor-pointer hover:underline">
+                    Create an account
+                </span>
+            </p>
+        </div>
+    </div>
+
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- GSAP + ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Lenis smooth scroll (UMD) -->
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.6/bundled/lenis.min.js"></script>
+
+    <!-- Optional: ScrollReveal for subtle reveals -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <!-- Three.js -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+
+
+
+
+
+
+    <script src="script.js" defer></script>
+
+
+
+
+</body>
+
+</html>

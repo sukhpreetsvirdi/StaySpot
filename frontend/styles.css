@@ -1,0 +1,103 @@
+:root {
+  --accent: #22c55e;
+  --dark: #052022;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial;
+  background: #0b1220;
+  color: #e6eef0;
+}
+
+/* 3D canvas takes full screen behind content */
+canvas#bg3d {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  display: block;
+}
+
+/* Ensure sections render above canvas */
+main,
+header,
+section,
+footer,
+nav {
+  position: relative;
+  z-index: 2;
+}
+
+/* minor helpers */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(6px);
+  border-radius: 14px;
+}
+
+.floating {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-14px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Responsive hero text */
+.hero-title {
+  font-weight: 100;
+  line-height: 1;
+  color: white;
+  text-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* make sure nav isn't transparent too much on small screens */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 1.25rem !important;
+  }
+}
+
+/* hero section  */
+
+.floating {
+  animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Hero parallax background */
+#hero-bg img {
+  will-change: transform;
+  transition: transform 1s ease-out;
+}
+
+/* Text animation fade effect */
+#heroDynamic {
+  display: inline-block;
+  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+}
