@@ -1,6 +1,6 @@
 -- 🏡 StaySpot Database Schema
 -- Author: Sukhpreet
--- Description: Tables for users, listings, and image uploads
+-- Description: Tables for users, admins, listings, and reviews
 
 CREATE DATABASE IF NOT EXISTS stayspot;
 USE stayspot;
@@ -11,6 +11,17 @@ CREATE TABLE IF NOT EXISTS users (
   name VARCHAR(100) NOT NULL,
   email VARCHAR(120) UNIQUE NOT NULL,
   password VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 👑 Admin Users table
+CREATE TABLE IF NOT EXISTS admin_users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(100) UNIQUE NOT NULL,
+  email VARCHAR(120) UNIQUE NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  role ENUM('superadmin', 'moderator', 'support') DEFAULT 'moderator',
+  status ENUM('active', 'inactive') DEFAULT 'active',
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -30,7 +41,7 @@ CREATE TABLE IF NOT EXISTS listings (
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
 );
 
--- 💬 Reviews table (optional future feature)
+-- 💬 Reviews table (for future features)
 CREATE TABLE IF NOT EXISTS reviews (
   id INT AUTO_INCREMENT PRIMARY KEY,
   listing_id INT NOT NULL,
@@ -42,10 +53,15 @@ CREATE TABLE IF NOT EXISTS reviews (
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
--- ⚙️ Insert sample data (optional for testing)
+-- ⚙️ Insert sample data
 INSERT INTO users (name, email, password)
 VALUES 
 ('Test User', 'test@example.com', 'hashedpassword123');
+
+INSERT INTO admin_users (username, email, password, role)
+VALUES
+('admin', 'admin@stayspot.in', 'admin123', 'superadmin'),
+('support1', 'support@stayspot.in', 'support123', 'support');
 
 INSERT INTO listings (title, description, price, address, property_type, furnished, contact, image_url, user_id)
 VALUES 
