@@ -15,12 +15,29 @@ app.use(express.json());
 app.use("/uploads", express.static("uploads"));
 
 // ✅ Connect MySQL
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "Pa77word", // change if your MySQL has password
-  database: "stayspot"
+import mysql from "mysql2";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const connection = mysql.createConnection({
+  host: process.env.MYSQL_ADDON_HOST,
+  user: process.env.MYSQL_ADDON_USER,
+  password: process.env.MYSQL_ADDON_PASSWORD,
+  database: process.env.MYSQL_ADDON_DB,
+  port: process.env.MYSQL_ADDON_PORT
 });
+
+connection.connect((err) => {
+  if (err) {
+    console.error("❌ Database connection failed:", err);
+  } else {
+    console.log("✅ Connected to Clever Cloud MySQL database!");
+  }
+});
+
+export default connection;
+
 
 db.connect(err => {
   if (err) {
