@@ -17,6 +17,13 @@ app.use(cors());
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
 
+console.log("🛰️ DB ENV CHECK:");
+console.log("Host:", process.env.MYSQL_ADDON_HOST);
+console.log("User:", process.env.MYSQL_ADDON_USER);
+console.log("Database:", process.env.MYSQL_ADDON_DB);
+console.log("Port:", process.env.MYSQL_ADDON_PORT);
+
+
 // ✅ Connect to MySQL (only once!)
 const db = mysql.createConnection({
   host: process.env.MYSQL_ADDON_HOST,
